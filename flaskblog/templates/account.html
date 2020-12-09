@@ -5,7 +5,6 @@
         <img class="rounded-circle account-img" src="{{ image_file }}">
         <div class="media-body">
           <h2 class="account-heading">{{ current_user.username }}</h2>
-          <p class="text-secondary">{{ current_user.email }}</p>
 		  <a class="btn btn-primary btn-sm mt-1 mb-1" href="{{ url_for('posts.new_post') }}">New Post</a>&nbsp;&nbsp;<a class="btn btn-danger btn-sm mt-1 mb-1" href="{{ url_for('users.logout') }}">Log Out</a>
         </div>
       </div>
