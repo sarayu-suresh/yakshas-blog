@@ -1,0 +1,87 @@
+body {
+  background: black;
+  color: white;
+  margin-top: 6rem;
+  font-family: 'Averia Serif Libre';font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: white;
+}
+
+.bg-steel {
+  background-color: black; /* For browsers that do not support gradients */
+  background-image: linear-gradient(#780505, black);
+}
+
+.site-header .navbar-nav .nav-link {
+  color: white;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: yellow;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 500;
+}
+
+.content-section {
+  background: black;
+  padding: 10px 20px;
+  border: 0px solid #333333;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: white;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+  color: white;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  color:white
+}
+
+.article-metadata a:hover {
+  color: yellow;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+.img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}

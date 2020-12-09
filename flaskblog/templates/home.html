@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-9">
+		{% for post in posts.items %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="user image">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class=" name mr-2" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+              <small class="text-muted">Posted on {{ post.date_posted.strftime('%d-%m-%Y') }}</small>
+            </div>
+            <h2><a class="article-title text-break" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+            <p class="article-content text-break">{{ post.content | truncate(200) }} <a class="mr-2" href="{{ url_for('posts.post', post_id=post.id) }}">See more</a></p>
+          </div>
+        </article>
+		{% endfor %}
+		{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if posts.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+		{% endfor %}
+        </div>
+		<div class="col-md-3">
+          <div class="content-section">
+            <h3><b><center>Announcements</center></b></h3>
+			<div class="border-top pt-1"></div>
+            <marquee direction = "up" scrollamount="3" height="50%">
+				<center>This is our new venture...
+				<br>Introducing to you,our very own blog !!! <br><br>Join us for sharing your sweetest memories at RIT
+				<img width="100" height="50" src="{{ url_for('static',filename='profile_pics/name.png') }}">
+				<br>
+			</marquee>
+          </div>
+        </div>
+      </div>
+    </main>
+{% endblock content %}
+	<small class="text-muted">{{ post.date_posted.strftime('%d-%m-%Y | %I:%M%p') }} IST</small>

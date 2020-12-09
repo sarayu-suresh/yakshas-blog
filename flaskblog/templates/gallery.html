@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+	.zoom
+	{
+		transition: transform 0.5s;
+	}
+	.zoom:hover
+	{
+		transform: scale(1.2);
+	}
+</style>
+<br>
+<br>
+	<main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+			<div class="zoom"><img src="{{ url_for('static', filename='profile_pics/onam.jpeg') }}" width="100%" ></div><br>
+        </div>
+      </div>
+	  <div class="row">
+		<div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+			<div class="zoom"><img src="{{ url_for('static', filename='profile_pics/freshers.jpeg') }}" width="100%" ></div><br>
+        </div>
+      </div>
+	  <div class="row">
+        <div class="col-md-8">
+			<div class="zoom"><img src="{{ url_for('static', filename='profile_pics/nit.jpeg') }}" width="100%" ></div><br>
+        </div>
+		<div class="col-md-4">
+        </div>
+      </div>
+	  <div class="row">
+		<div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+			<div class="zoom"><img src="{{ url_for('static', filename='profile_pics/magazine.jpeg') }}" width="100%" ></div><br>
+        </div>
+      </div>
+    </main>
+
+	
+{% endblock content %}
+
+	

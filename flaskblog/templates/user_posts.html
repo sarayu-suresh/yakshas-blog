@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="media">
+		<img class="rounded-circle account-img" src="{{ url_for('static',filename='profile_pics/' +user.image_file) }}">
+			<div class="media-body">
+			   {% if user.username==current_user.username %}
+					<h3 class="account-heading">{{user.username}} &nbsp; <a class="btn btn-primary btn-sm mt-1 mb-1" href="{{ url_for('users.account') }}">Edit profile</a></h3>
+				{% else %}
+					<h3 class="account-heading">{{user.username}}</h3>
+				{% endif %}
+				<p>{{user.email}}</p>
+				<i><p class="article-content text-break">{{ user.bio }}</p></i>
+				<p  class="ml-10">Total Posts: {{ posts.total }} </p>
+			</div>
+	</div>
+	<div class="border-top pt-1"></div>
+    {% for post in posts.items %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="user image">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="name mr-2" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+              <small class="text-muted">Posted on {{ post.date_posted.strftime('%d-%m-%Y ') }}</small>
+            </div>
+            <h2><a class="article-title text-break" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+            <p class="article-content text-break">{{ post.content }}</p>
+			{% if post.image=='default.jpeg' %}
+				<div></div>
+			{% else %}
+			  <div class="align"><img class="" src="{{ url_for('static', filename='pictures/' + post.image) }}" alt="image"></div>
+			{% endif %}
+          </div>
+        </article>
+    {% endfor %}
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if posts.page == page_num %}
+                <a class="btn btn-info mb-4" href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-outline-info mb-4" href="{{ url_for('users.user_posts', username=user.username, page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
