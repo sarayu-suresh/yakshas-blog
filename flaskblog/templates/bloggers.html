@@ -8,7 +8,7 @@
 }
 </style>
     <h3 align="center"><img width="150" height="80" src="{{ url_for('static',filename='profile_pics/name.png') }}"></h3>
-	<div class="col-md-8 center">
+	<div class="col-md-8 sm-8 center">
         {% for user in users.items %}
         <article class="media content-section">
             <img class="rounded-circle" width="35" height="35" src="{{ url_for('static',filename='profile_pics/' +user.image_file) }}" alt="user image">
