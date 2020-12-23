@@ -1,7 +1,8 @@
 # Needed setting secret key, email and psswd
+fromr os import environ
 class Config:
     SECRET_KEY = 'qwertyuiop'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///site.db'
+    SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL') or 'sqlite:///site.db'
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
