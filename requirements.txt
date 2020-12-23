@@ -31,7 +31,6 @@ pypiwin32==223
 python-dateutil==1.5
 pyttsx3==2.90
 pytz==2020.4
-pywin32==300
 requests==2.25.0
 six==1.15.0
 SpeechRecognition==3.8.1
