@@ -1,5 +1,5 @@
 # Needed setting secret key, email and psswd
-fromr os import environ
+from os import environ
 class Config:
     SECRET_KEY = 'qwertyuiop'
     SQLALCHEMY_DATABASE_URI = environ.get('DATABASE_URL') or 'sqlite:///site.db'
