@@ -6,5 +6,5 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = 'yakshas2k19.23@gmail.com'
-    MAIL_PASSWORD = 'Cserit2k19'
+    MAIL_USERNAME = environ.get('USER')
+    MAIL_PASSWORD = environ.get('password')
