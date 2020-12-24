@@ -24,7 +24,7 @@ def gallery():
 @main.route('/bloggers')
 def bloggers():
     page = request.args.get('page', 1, type=int)
-    users = User.query.paginate(page=page, per_page=5)
+    users = User.query.paginate(page=page, per_page=60)
     posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('bloggers.html', title='bloggers', users=users, posts=posts)
 
