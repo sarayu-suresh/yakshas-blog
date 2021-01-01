@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 	<div class="media">
-		<img class="rounded-circle account-img" src="{{ url_for('static',filename='profile_pics/' +user.image_file) }}">
+		<img class="rounded-circle account-img" src="{{ firebase_storage.prof_pic(user.image_file) }}">
 			<div class="media-body">
 			   {% if user.username==current_user.username %}
 					<h3 class="account-heading">{{user.username}} &nbsp; <a class="btn btn-primary btn-sm mt-1 mb-1" href="{{ url_for('users.account') }}">Edit profile</a></h3>
@@ -16,7 +16,7 @@
 	<div class="border-top pt-1"></div>
     {% for post in posts.items %}
         <article class="media content-section">
-            <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="user image">
+            <img class="rounded-circle article-img" src="{{ firebase_storage.prof_pic(post.author.image_file) }}" alt="user image">
           <div class="media-body">
             <div class="article-metadata">
               <a class="name mr-2" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
@@ -27,7 +27,7 @@
 			{% if post.image=='default.jpeg' %}
 				<div></div>
 			{% else %}
-			  <center><div class="align"><img class="col-md-6 col-sm-6" src="{{ url_for('static', filename='pictures/' + post.image) }}" alt="image"></div></center>
+			  <center><div class="align"><img class="col-md-6 col-sm-6" src="{{ firebase_storage.prof_pic(post.image) }}" alt="image"></div></center>
 			{% endif %}
           </div>
         </article>

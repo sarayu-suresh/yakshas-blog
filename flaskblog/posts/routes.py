@@ -4,6 +4,7 @@ from flaskblog import db
 from flaskblog.models import Post
 from flaskblog.posts.forms import PostForm
 from flaskblog.posts.utils import save_picture
+from flaskblog import firebase_storage
 
 
 posts = Blueprint('posts', __name__)
@@ -23,13 +24,14 @@ def new_post():
         flash('Your post has been published.', 'success')
         return redirect(url_for('main.home'))
     return render_template('create_post.html', title='New Post',
-                           form=form, legend='New Post')
+                           form=form, legend='New Post', prof_pic=firebase_storage.prof_img(current_user))
 
 
 @posts.route("/post/<int:post_id>")
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    return render_template('post.html', title=post.title, post=post)
+    return render_template('post.html', title=post.title, post=post, prof_pic=firebase_storage.prof_img(current_user),
+                           firebase_storage=firebase_storage)
 
 
 @posts.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
@@ -52,7 +54,7 @@ def update_post(post_id):
         form.title.data = post.title
         form.content.data = post.content
     return render_template('create_post.html', title='Update Post',
-                           form=form, legend='Update Post')
+                           form=form, legend='Update Post', prof_pic=firebase_storage.prof_img(current_user))
 
 
 @posts.route("/post/<int:post_id>/delete", methods=['POST'])

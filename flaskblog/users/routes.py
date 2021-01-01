@@ -1,6 +1,6 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
-from flaskblog import db, bcrypt
+from flaskblog import db, bcrypt, firebase_storage
 from flaskblog.models import User, Post
 from flaskblog.users.forms import (RegistrationForm, LoginForm, UpdateAccountForm,
                                    RequestResetForm, ResetPasswordForm)
@@ -22,7 +22,7 @@ def register():
         db.session.commit()
         flash('Account created successfully. You can now log in!', 'success')
         return redirect(url_for('users.login'))
-    return render_template('register.html', title='Register', form=form)
+    return render_template('register.html', title='Register', form=form, prof_pic=firebase_storage.prof_img(current_user))
 
 
 @users.route('/login', methods=['GET', 'POST'])
@@ -38,7 +38,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Login unsuccessful. Please check email and password', 'danger')
-    return render_template('login.html', title='Login', form=form)
+    return render_template('login.html', title='Login', form=form, prof_pic=firebase_storage.prof_img(current_user))
 
 
 @users.route('/logout')
@@ -65,9 +65,9 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
         form.bio.data = current_user.bio
-    image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
+    image_file = firebase_storage.prof_pic(current_user.image_file)
     return render_template('account.html', title='Account',
-                           image_file=image_file, form=form)
+                           image_file=image_file, form=form, prof_pic=firebase_storage.prof_img(current_user))
 
 
 @users.route('/user/<string:username>')
@@ -77,7 +77,8 @@ def user_posts(username):
     posts = Post.query.filter_by(author=user)\
         .order_by(Post.date_posted.desc())\
         .paginate(page=page, per_page=5)
-    return render_template('user_posts.html', posts=posts, user=user)
+    return render_template('user_posts.html', posts=posts, user=user, prof_pic=firebase_storage.prof_img(current_user),
+                           firebase_storage=firebase_storage)
 
 
 @users.route('/post/reset_password', methods=['GET', 'POST'])
@@ -88,9 +89,9 @@ def reset_request():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
-        flash('An email has been sent to your registered email id with reset password instructions', 'info')
+        flash('An email has been sent to your registered email id with reset password instructions. If not found in your inbox, please check your spam folder', 'info')
         return redirect(url_for('users.login'))
-    return render_template('reset_request.html', title='Reset password', form=form)
+    return render_template('reset_request.html', title='Reset password', form=form, prof_pic=firebase_storage.prof_img(current_user))
 
 
 @users.route('/post/reset_password/<token>', methods=['GET', 'POST'])
@@ -108,4 +109,4 @@ def reset_token(token):
         db.session.commit()
         flash('Password updated successfully. You can now log in!', 'success')
         return redirect(url_for('users.login'))
-    return render_template('reset_token.html', title='Reset password', form=form)
+    return render_template('reset_token.html', title='Reset password', form=form, prof_pic=firebase_storage.prof_img(current_user))

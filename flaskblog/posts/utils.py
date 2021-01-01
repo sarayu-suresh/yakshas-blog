@@ -2,6 +2,7 @@ import os
 import secrets
 from PIL import Image
 from flask import current_app
+from flaskblog import firebase_storage
 
 
 def save_picture(form_picture):
@@ -14,5 +15,8 @@ def save_picture(form_picture):
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
+
+    storage = firebase_storage.storage()
+    storage.child("images/" + picture_fn).put(picture_path)
 
     return picture_fn
