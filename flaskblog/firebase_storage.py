@@ -3,14 +3,14 @@ from os import environ
 
 
 firebaseConfig = {
-    "apiKey": environ.get('apiKey'),
-    "authDomain": environ.get('authDomain'),
-    'databaseURL': environ.get('databaseURL'),
-    "projectId": "yakshas-blog",
-    "storageBucket": environ.get('storageBucket'),
-    "messagingSenderId": environ.get('messagingSenderId'),
-    "appId": environ.get('appId'),
-    "measurementId": environ.get('measurementId')
+    'apiKey': "AIzaSyA84q6tGmLOqchjRTXvQa9nI8-OhbkJsHk",
+  'authDomain': "yakshas-blog.firebaseapp.com",
+  'databaseURL': "https://yakshas-blog-default-rtdb.firebaseio.com",
+  'projectId': "yakshas-blog",
+  'storageBucket': "yakshas-blog.appspot.com",
+  'messagingSenderId': "499297033450",
+  'appId': "1:499297033450:web:da142bca0fbcbc20ff0b93",
+  'measurementId': "G-BY2TP5GBGK"
     }
 
 
