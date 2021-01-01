@@ -1,16 +1,17 @@
 import pyrebase
 from os import environ
+from boto.s3.connection import S3Connection
 
 
 firebaseConfig = {
-    "apiKey": environ.get('apiKey'),
-    "authDomain": environ.get('authDomain'),
-    'databaseURL': environ.get('databaseURL'),
+    "apiKey": S3Connection(environ.get('apiKey')),
+    "authDomain": S3Connection(environ.get('authDomain')),
+    'databaseURL': S3Connection(environ.get('databaseURL')),
     "projectId": "yakshas-blog",
-    "storageBucket": environ.get('storageBucket'),
-    "messagingSenderId": environ.get('messagingSenderId'),
-    "appId": environ.get('appId'),
-    "measurementId": environ.get('measurementId')
+    "storageBucket": S3Connection(environ.get('storageBucket')),
+    "messagingSenderId": S3Connection(environ.get('messagingSenderId')),
+    "appId": S3Connection(environ.get('appId')),
+    "measurementId": S3Connection(environ.get('measurementId'))
     }
 
 
